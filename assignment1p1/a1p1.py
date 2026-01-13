@@ -28,9 +28,27 @@ def list_recursively(path):
     
     print_values(all_files_dirs)
 
-"""def list_only_files(path):
+def list_only_files(path):
+    p = Path(path)
+    all_files = []
 
-def list_exact_files(path, file_name):
+    for item in p.iterdir():
+        if item.is_file():
+            all_files.append(item)
+    
+    print_values(all_files)
+
+def list_only_files_recursively(path):
+    p = Path(path)
+    all_files = []
+
+    for item in p.rglob("*"):
+        if item.is_file():
+            all_files.append(item)
+    
+    print_values(all_files)
+
+"""def list_exact_files(path, file_name):
 
 def list_files_extensions(path, extension_name):"""
 
@@ -41,6 +59,10 @@ def main():
     list_files("testdir")
     print ("\nlist recursively")
     list_recursively("testdir")
+    print ("\nlist only files")
+    list_only_files("testdir")
+    print ("\nlist only files recursively")
+    list_only_files_recursively("testdir")
 
 
 if __name__ == "__main__":
