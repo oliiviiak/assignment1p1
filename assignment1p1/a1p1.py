@@ -68,7 +68,25 @@ def list_exact_filename_recursively(path, file_name):
     
     print_values(all_files)
 
-"""def list_files_extensions(path, extension_name):"""
+def list_files_extensions(path, extension_name):
+    p = Path(path)
+    all_files = []
+
+    for item in p.iterdir():
+        if item.is_file() and item.suffix[1:] == extension_name:
+            all_files.append(item)
+    
+    print_values(all_files)
+
+def list_files_extensions_recursively(path, extension_name):
+    p = Path(path)
+    all_files = []
+
+    for item in p.rglob("*"):
+        if item.is_file() and item.suffix[1:] == extension_name:
+            all_files.append(item)
+    
+    print_values(all_files)
 
 
 def main():
@@ -85,6 +103,10 @@ def main():
     list_exact_filename("testdir", "testfile1.txt")
     print ("\nlist only files with specific name recursively")
     list_exact_filename_recursively("testdir", "testfile1.txt")
+    print ("\nlist only files with specific extension")
+    list_files_extensions("testdir", "txt")
+    print ("\nlist only files with specific extension recursively")
+    list_files_extensions_recursively("testdir", "py")
 
 
 if __name__ == "__main__":
