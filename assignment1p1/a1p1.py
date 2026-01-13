@@ -1,20 +1,33 @@
-# Olivia Kong
-# okyong@uci.edu
-# 92692989
 
-def list_files():
+from pathlib import Path
 
-def list_recursively():
+def print_values(list_name):
+    for item in list_name:
+        print (item)
 
-def list_only_files():
+def list_files(path):
+    p = Path(path)
+    all_files_dirs = []
 
-def list_exact_files():
+    for item in p.iterdir():
+        all_files_dirs.append(item)
+    
+    print_values(all_files_dirs)
 
-def list_files_extensions():
+
+"""def list_recursively(path):
+
+def list_only_files(path):
+
+def list_exact_files(path, file_name):
+
+def list_files_extensions(path, extension_name):"""
 
 
 def main():
-    command, path = input().split(" ")
+    #command, path = input().split(" ")
+    list_files("testdir")
+
 
 if __name__ == "__main__":
     main()
