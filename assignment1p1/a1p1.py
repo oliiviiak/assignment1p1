@@ -110,17 +110,30 @@ def list_files_extensions_recursively(path, extension_name):
 
     print_values(all_files)
 
+def welcome():
+    print ("Welcome to the File System Inspector!\n")
+    print ("Here's the format for the user input:")
+    print ("[COMMAND] [INPUT] [[-]OPTION] [INPUT]\n")
+    print("Commands:")
+    print("  L - List the contents of the user specified directory.")
+    print("  Q - Quit the program.\n")
+    print("Options for \"L\":")
+    print("-r Output directory content recursively.")
+    print("-f Output only files, excluding directories in the results.")
+    print("-s Output only files that match a given file name.")
+    print("-e Output only files that match a given file extension.")
 
 def main():
+    welcome()
 
     while True:
 
-        input = input().strip()
+        user_input = input("\nEnter command or type \"Q\" to quit: ").strip()
 
-        if not input():
+        if not user_input:
             continue
 
-        full_input = input.split()
+        full_input = user_input.split()
         command = full_input[0]
 
         if command == "Q":
@@ -133,8 +146,27 @@ def main():
             path = full_input[1]
             option = full_input[2:]
 
-            if option == "":
+            # recursive functions
+            if len(option) == 0:
                 list_files(path)
+            elif option[0] == "-r":
+                if len(option) == 1:
+                    list_recursively(path)
+                elif option[1] == "-f":
+                    list_only_files_recursively(path)
+                elif option[1] == "-s" and len(option) > 2:
+                    list_exact_filename_recursively(path, option[2])
+                elif option[1] == "-e" and len(option) > 2:
+                    list_files_extensions_recursively(path, option[2])
+            
+            # non-recursive functions
+            elif option[0] == "-f":
+                list_only_files(path)
+            elif option[0] == "-s" and len(option) > 1:
+                list_exact_filename(path, option[1])
+            elif option[0] == "-e" and len(option) > 1:
+                list_files_extensions(path, option[1])
+
 
     # print("list (not recursively)")
     # list_files("testdir")
