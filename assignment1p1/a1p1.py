@@ -1,12 +1,18 @@
 
+# Olivia Kong
+# oykong@uci.edu
+# 92692989
+
 from pathlib import Path
 
 
+# helper method for printing paths
 def print_values(list_name):
     for item in list_name:
         print(item)
 
 
+# L command
 def list_files(path):
     p = Path(path)
     all_files = []
@@ -22,6 +28,7 @@ def list_files(path):
     print_values(all_dirs)
 
 
+# L -r command
 def list_recursively(path):
     p = Path(path)
     all_files_dirs = []
@@ -32,6 +39,7 @@ def list_recursively(path):
     print_values(all_files_dirs)
 
 
+# L -f command
 def list_only_files(path):
     p = Path(path)
     all_files = []
@@ -43,6 +51,7 @@ def list_only_files(path):
     print_values(all_files)
 
 
+# L -r -f command
 def list_only_files_recursively(path):
     p = Path(path)
     all_files = []
@@ -54,6 +63,7 @@ def list_only_files_recursively(path):
     print_values(all_files)
 
 
+# L -s command
 def list_exact_filename(path, file_name):
     p = Path(path)
     all_files = []
@@ -65,6 +75,7 @@ def list_exact_filename(path, file_name):
     print_values(all_files)
 
 
+# L -r -s command
 def list_exact_filename_recursively(path, file_name):
     p = Path(path)
     all_files = []
@@ -76,6 +87,7 @@ def list_exact_filename_recursively(path, file_name):
     print_values(all_files)
 
 
+# L -e command
 def list_files_extensions(path, extension_name):
     p = Path(path)
     all_files = []
@@ -87,6 +99,7 @@ def list_files_extensions(path, extension_name):
     print_values(all_files)
 
 
+# L -r -e command
 def list_files_extensions_recursively(path, extension_name):
     p = Path(path)
     all_files = []
@@ -99,23 +112,46 @@ def list_files_extensions_recursively(path, extension_name):
 
 
 def main():
-    # command, path = input().split(" ")
-    print("list (not recursively)")
-    list_files("testdir")
-    print("\nlist recursively")
-    list_recursively("testdir")
-    print("\nlist only files")
-    list_only_files("testdir")
-    print("\nlist only files recursively")
-    list_only_files_recursively("testdir")
-    print("\nlist only files with specific name")
-    list_exact_filename("testdir", "testfile1.txt")
-    print("\nlist only files with specific name recursively")
-    list_exact_filename_recursively("testdir", "testfile1.txt")
-    print("\nlist only files with specific extension")
-    list_files_extensions("testdir", "txt")
-    print("\nlist only files with specific extension recursively")
-    list_files_extensions_recursively("testdir", "py")
+
+    while True:
+
+        input = input().strip()
+
+        if not input():
+            continue
+
+        full_input = input.split()
+        command = full_input[0]
+
+        if command == "Q":
+            break
+
+        if command == "L":
+            if len(full_input) < 2:
+                continue
+
+            path = full_input[1]
+            option = full_input[2:]
+
+            if option == "":
+                list_files(path)
+
+    # print("list (not recursively)")
+    # list_files("testdir")
+    # print("\nlist recursively")
+    # list_recursively("testdir")
+    # print("\nlist only files")
+    # list_only_files("testdir")
+    # print("\nlist only files recursively")
+    # list_only_files_recursively("testdir")
+    # print("\nlist only files with specific name")
+    # list_exact_filename("testdir", "testfile1.txt")
+    # print("\nlist only files with specific name recursively")
+    # list_exact_filename_recursively("testdir", "testfile1.txt")
+    # print("\nlist only files with specific extension")
+    # list_files_extensions("testdir", "txt")
+    # print("\nlist only files with specific extension recursively")
+    # list_files_extensions_recursively("testdir", "py")
 
 
 if __name__ == "__main__":
