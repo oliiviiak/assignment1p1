@@ -110,10 +110,11 @@ def list_files_extensions_recursively(path, extension_name):
 
     print_values(all_files)
 
+
 def welcome():
-    print ("Welcome to the File System Inspector!\n")
-    print ("Here's the format for the user input:")
-    print ("[COMMAND] [INPUT] [[-]OPTION] [INPUT]\n")
+    print("Welcome to the File System Inspector!\n")
+    print("Here's the format for the user input:")
+    print("[COMMAND] [INPUT] [[-]OPTION] [INPUT]\n")
     print("Commands:")
     print("  L - List the contents of the user specified directory.")
     print("  Q - Quit the program.\n")
@@ -122,6 +123,7 @@ def welcome():
     print("-f Output only files, excluding directories in the results.")
     print("-s Output only files that match a given file name.")
     print("-e Output only files that match a given file extension.")
+
 
 def main():
     welcome()
@@ -158,7 +160,7 @@ def main():
                     list_exact_filename_recursively(path, option[2])
                 elif option[1] == "-e" and len(option) > 2:
                     list_files_extensions_recursively(path, option[2])
-            
+
             # non-recursive functions
             elif option[0] == "-f":
                 list_only_files(path)
@@ -166,7 +168,8 @@ def main():
                 list_exact_filename(path, option[1])
             elif option[0] == "-e" and len(option) > 1:
                 list_files_extensions(path, option[1])
-
+        else:
+            print("Invalid path/command, try again.")
 
     # print("list (not recursively)")
     # list_files("testdir")
