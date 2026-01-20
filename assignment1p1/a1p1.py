@@ -148,45 +148,38 @@ def main():
             path = full_input[1]
             option = full_input[2:]
 
-            # recursive functions
-            if len(option) == 0:
-                list_files(path)
-            elif option[0] == "-r":
-                if len(option) == 1:
-                    list_recursively(path)
-                elif option[1] == "-f":
-                    list_only_files_recursively(path)
-                elif option[1] == "-s" and len(option) > 2:
-                    list_exact_filename_recursively(path, option[2])
-                elif option[1] == "-e" and len(option) > 2:
-                    list_files_extensions_recursively(path, option[2])
+            try:
+                # recursive functions
+                if len(option) == 0:
+                    list_files(path)
+                elif option[0] == "-r":
+                    if len(option) == 1:
+                        list_recursively(path)
+                    elif option[1] == "-f":
+                        list_only_files_recursively(path)
+                    elif option[1] == "-s" and len(option) > 2:
+                        list_exact_filename_recursively(path, option[2])
+                    elif option[1] == "-e" and len(option) > 2:
+                        list_files_extensions_recursively(path, option[2])
 
-            # non-recursive functions
-            elif option[0] == "-f":
-                list_only_files(path)
-            elif option[0] == "-s" and len(option) > 1:
-                list_exact_filename(path, option[1])
-            elif option[0] == "-e" and len(option) > 1:
-                list_files_extensions(path, option[1])
+                # non-recursive functions
+                elif option[0] == "-f":
+                    list_only_files(path)
+                elif option[0] == "-s" and len(option) > 1:
+                    list_exact_filename(path, option[1])
+                elif option[0] == "-e" and len(option) > 1:
+                    list_files_extensions(path, option[1])
+
+            except FileNotFoundError:
+                print(f"Error: the path '{path}' was not found.")
+            except NotADirectoryError:
+                print(f"Error: '{path}' is a valid file path,",
+                      "but a directory path is required.")
+            except PermissionError:
+                print(f"Error: Permission denied for '{path}'")
+
         else:
-            print("Invalid path/command, try again.")
-
-    # print("list (not recursively)")
-    # list_files("testdir")
-    # print("\nlist recursively")
-    # list_recursively("testdir")
-    # print("\nlist only files")
-    # list_only_files("testdir")
-    # print("\nlist only files recursively")
-    # list_only_files_recursively("testdir")
-    # print("\nlist only files with specific name")
-    # list_exact_filename("testdir", "testfile1.txt")
-    # print("\nlist only files with specific name recursively")
-    # list_exact_filename_recursively("testdir", "testfile1.txt")
-    # print("\nlist only files with specific extension")
-    # list_files_extensions("testdir", "txt")
-    # print("\nlist only files with specific extension recursively")
-    # list_files_extensions_recursively("testdir", "py")
+            print("Invalid/Unsupported, try again.")
 
 
 if __name__ == "__main__":
